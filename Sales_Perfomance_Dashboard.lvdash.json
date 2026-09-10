@@ -1,0 +1,1503 @@
+{
+  "datasets": [
+    {
+      "name": "5231517d",
+      "displayName": "Sales Data",
+      "config": {
+        "version": "1.1",
+        "source": "SELECT * FROM workspace.default.gold_sales",
+        "dimensions": [
+          {
+            "name": "TransactionID",
+            "expr": "TransactionID"
+          },
+          {
+            "name": "TransactionDate",
+            "expr": "TransactionDate"
+          },
+          {
+            "name": "CustomerID",
+            "expr": "CustomerID"
+          },
+          {
+            "name": "ProductID",
+            "expr": "ProductID"
+          },
+          {
+            "name": "ProductCategory",
+            "expr": "ProductCategory"
+          },
+          {
+            "name": "ProductName",
+            "expr": "ProductName"
+          },
+          {
+            "name": "PaymentMethod",
+            "expr": "PaymentMethod"
+          },
+          {
+            "name": "StoreRegion",
+            "expr": "StoreRegion"
+          },
+          {
+            "name": "SalesChannel",
+            "expr": "SalesChannel"
+          },
+          {
+            "name": "CustomerType",
+            "expr": "CustomerType"
+          },
+          {
+            "name": "OrderStatus",
+            "expr": "OrderStatus"
+          },
+          {
+            "name": "SaleMonth",
+            "expr": "DATE_TRUNC('MONTH', TransactionDate)"
+          }
+        ],
+        "measures": [
+          {
+            "name": "total_sales",
+            "expr": "SUM(SalesAmount)",
+            "displayName": "Total Sales"
+          },
+          {
+            "name": "number_of_orders",
+            "expr": "COUNT(*)",
+            "displayName": "Number of Orders"
+          },
+          {
+            "name": "units_sold",
+            "expr": "SUM(Quantity)",
+            "displayName": "Units Sold"
+          },
+          {
+            "name": "avg_order_value",
+            "expr": "SUM(SalesAmount) / COUNT(*)",
+            "displayName": "Average Order Value"
+          },
+          {
+            "name": "unique_customers",
+            "expr": "COUNT(DISTINCT CustomerID)",
+            "displayName": "Unique Customers"
+          },
+          {
+            "name": "avg_items_per_order",
+            "expr": "SUM(Quantity) / COUNT(*)",
+            "displayName": "Avg Items per Order"
+          },
+          {
+            "name": "avg_discount",
+            "expr": "AVG(Discount)",
+            "displayName": "Average Discount"
+          },
+          {
+            "name": "total_discount_amount",
+            "expr": "SUM(Discount * SalesAmount)",
+            "displayName": "Total Discount Amount"
+          }
+        ]
+      }
+    },
+    {
+      "name": "d77e695e",
+      "displayName": "Untitled dataset",
+      "queryLines": [
+        ""
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "name": "43c34d37",
+      "displayName": "Overview",
+      "layout": [
+        {
+          "widget": {
+            "name": "kpi_total_sales",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5231517d",
+                  "fields": [
+                    {
+                      "name": "measure(total_sales)",
+                      "expression": "MEASURE(`total_sales`)"
+                    }
+                  ],
+                  "filters": [
+                    {
+                      "expression": "`OrderStatus` IN ('Completed')"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Total Sales",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "measure(total_sales)",
+                  "rowNumber": 0,
+                  "format": {
+                    "type": "number-currency",
+                    "currencyCode": "ZAR",
+                    "abbreviation": "compact",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 2
+                    }
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_num_orders",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5231517d",
+                  "fields": [
+                    {
+                      "name": "measure(number_of_orders)",
+                      "expression": "MEASURE(`number_of_orders`)"
+                    }
+                  ],
+                  "filters": [
+                    {
+                      "expression": "`OrderStatus` IN ('Completed')"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Number of Orders",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "measure(number_of_orders)",
+                  "rowNumber": 0
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 2,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_units_sold",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5231517d",
+                  "fields": [
+                    {
+                      "name": "measure(units_sold)",
+                      "expression": "MEASURE(`units_sold`)"
+                    }
+                  ],
+                  "filters": [
+                    {
+                      "expression": "`OrderStatus` IN ('Completed')"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Units Sold",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "measure(units_sold)",
+                  "rowNumber": 0
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 2,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_avg_order",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5231517d",
+                  "fields": [
+                    {
+                      "name": "measure(avg_order_value)",
+                      "expression": "MEASURE(`avg_order_value`)"
+                    }
+                  ],
+                  "filters": [
+                    {
+                      "expression": "`OrderStatus` IN ('Completed')"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Average Order Value",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "measure(avg_order_value)",
+                  "rowNumber": 0
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 9,
+            "y": 2,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "sales_by_month",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5231517d",
+                  "fields": [
+                    {
+                      "name": "monthly(SaleMonth)",
+                      "expression": "DATE_TRUNC(\"MONTH\", `SaleMonth`)"
+                    },
+                    {
+                      "name": "measure(total_sales)",
+                      "expression": "MEASURE(`total_sales`)"
+                    }
+                  ],
+                  "filters": [
+                    {
+                      "expression": "`OrderStatus` IN ('Completed')"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Sales by Month",
+                "showTitle": true
+              },
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "monthly(SaleMonth)",
+                  "displayName": "Month",
+                  "scale": {
+                    "type": "temporal"
+                  }
+                },
+                "y": {
+                  "fieldName": "measure(total_sales)",
+                  "axis": {
+                    "hideGrid": true,
+                    "hideLabels": true
+                  },
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "compact",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 2
+                    }
+                  },
+                  "displayName": "total_sales",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "label": {
+                  "show": true
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 6,
+            "width": 12,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "sales_by_category",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5231517d",
+                  "fields": [
+                    {
+                      "name": "ProductCategory",
+                      "expression": "`ProductCategory`"
+                    },
+                    {
+                      "name": "measure(total_sales)",
+                      "expression": "MEASURE(`total_sales`)"
+                    }
+                  ],
+                  "filters": [
+                    {
+                      "expression": "`OrderStatus` IN ('Completed')"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Sales by Product Category",
+                "showTitle": true
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "ProductCategory",
+                  "displayName": "ProductCategory",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "measure(total_sales)",
+                  "displayName": "total_sales",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "ProductCategory",
+                  "displayName": "ProductCategory",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "label": {
+                  "show": true
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 12,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "sales_by_region",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5231517d",
+                  "fields": [
+                    {
+                      "name": "StoreRegion",
+                      "expression": "`StoreRegion`"
+                    },
+                    {
+                      "name": "measure(total_sales)",
+                      "expression": "MEASURE(`total_sales`)"
+                    }
+                  ],
+                  "filters": [
+                    {
+                      "expression": "`OrderStatus` IN ('Completed')"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Sales by Region",
+                "showTitle": true
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "StoreRegion",
+                  "displayName": "StoreRegion",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "measure(total_sales)",
+                  "displayName": "total_sales",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "StoreRegion",
+                  "displayName": "StoreRegion",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "label": {
+                  "show": true
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 12,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "sales_by_channel",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5231517d",
+                  "fields": [
+                    {
+                      "name": "measure(total_sales)",
+                      "expression": "MEASURE(`total_sales`)"
+                    },
+                    {
+                      "name": "SalesChannel",
+                      "expression": "`SalesChannel`"
+                    }
+                  ],
+                  "filters": [
+                    {
+                      "expression": "`OrderStatus` IN ('Completed')"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Sales by Channel",
+                "showTitle": true
+              },
+              "widgetType": "pie",
+              "encodings": {
+                "angle": {
+                  "fieldName": "measure(total_sales)",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "displayName": "total_sales"
+                },
+                "color": {
+                  "fieldName": "SalesChannel",
+                  "displayName": "SalesChannel",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "label": {
+                  "show": true
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 18,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "top_products",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5231517d",
+                  "fields": [
+                    {
+                      "name": "ProductName",
+                      "expression": "`ProductName`"
+                    },
+                    {
+                      "name": "measure(total_sales)",
+                      "expression": "MEASURE(`total_sales`)"
+                    },
+                    {
+                      "name": "measure(units_sold)",
+                      "expression": "MEASURE(`units_sold`)"
+                    }
+                  ],
+                  "filters": [
+                    {
+                      "expression": "`OrderStatus` IN ('Completed')"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Top 10 Products",
+                "showTitle": true
+              },
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "ProductName"
+                  },
+                  {
+                    "fieldName": "measure(total_sales)"
+                  },
+                  {
+                    "fieldName": "measure(units_sold)"
+                  }
+                ]
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 18,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "c36d8c26",
+            "multilineTextboxSpec": {
+              "lines": [
+                "# <span style=\"text-align:center;display:block\"><span style=\"font-weight: 700;\">Gold Sales Office Spaces Dashboard</span></span>"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 9,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "9757c7bc",
+            "imageSpec": {
+              "image": {
+                "source": {
+                  "url": "data:image/jpeg;base64,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"
+                }
+              },
+              "frame": {},
+              "style": {}
+            }
+          },
+          "position": {
+            "x": 9,
+            "y": 0,
+            "width": 3,
+            "height": 2
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    },
+    {
+      "name": "global_filters",
+      "displayName": "Global Filters",
+      "layout": [
+        {
+          "widget": {
+            "name": "order_status_filter",
+            "queries": [
+              {
+                "name": "dashboards/01f19b055858114da2f7040d638e4636/datasets/01f19b0604751deba644702f582778cd_OrderStatus",
+                "query": {
+                  "datasetName": "5231517d",
+                  "fields": [
+                    {
+                      "name": "OrderStatus",
+                      "expression": "`OrderStatus`"
+                    },
+                    {
+                      "name": "OrderStatus_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Order Status",
+                "showTitle": true
+              },
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "OrderStatus",
+                    "queryName": "dashboards/01f19b055858114da2f7040d638e4636/datasets/01f19b0604751deba644702f582778cd_OrderStatus"
+                  }
+                ]
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "f024bab7",
+            "queries": [
+              {
+                "name": "dashboards/01f19b055858114da2f7040d638e4636/datasets/01f19b0604751deba644702f582778cd_yearly(TransactionDate)",
+                "query": {
+                  "datasetName": "5231517d",
+                  "fields": [
+                    {
+                      "name": "yearly(TransactionDate)",
+                      "expression": "DATE_TRUNC(\"YEAR\", `TransactionDate`)"
+                    },
+                    {
+                      "name": "yearly(TransactionDate)_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "showTitle": true
+              },
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "yearly(TransactionDate)",
+                    "displayName": "YEARLY(TransactionDate)",
+                    "queryName": "dashboards/01f19b055858114da2f7040d638e4636/datasets/01f19b0604751deba644702f582778cd_yearly(TransactionDate)"
+                  }
+                ]
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 4,
+            "width": 1,
+            "height": 2
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_GLOBAL_FILTERS",
+      "layoutVersion": "GRID_V1"
+    },
+    {
+      "name": "customer_analytics",
+      "displayName": "Customer & Behavioral Analytics",
+      "layout": [
+        {
+          "widget": {
+            "name": "kpi_unique_customers",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5231517d",
+                  "fields": [
+                    {
+                      "name": "measure(unique_customers)",
+                      "expression": "MEASURE(`unique_customers`)"
+                    }
+                  ],
+                  "filters": [
+                    {
+                      "expression": "`OrderStatus` IN ('Completed')"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Unique Customers",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "measure(unique_customers)",
+                  "rowNumber": 0
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_avg_items",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5231517d",
+                  "fields": [
+                    {
+                      "name": "measure(avg_items_per_order)",
+                      "expression": "MEASURE(`avg_items_per_order`)"
+                    }
+                  ],
+                  "filters": [
+                    {
+                      "expression": "`OrderStatus` IN ('Completed')"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Avg Items per Order",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "measure(avg_items_per_order)",
+                  "rowNumber": 0
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 2,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_avg_discount",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5231517d",
+                  "fields": [
+                    {
+                      "name": "measure(avg_discount)",
+                      "expression": "MEASURE(`avg_discount`)"
+                    }
+                  ],
+                  "filters": [
+                    {
+                      "expression": "`OrderStatus` IN ('Completed')"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Average Discount %",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "measure(avg_discount)",
+                  "rowNumber": 0
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 2,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_total_discount",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5231517d",
+                  "fields": [
+                    {
+                      "name": "measure(total_discount_amount)",
+                      "expression": "MEASURE(`total_discount_amount`)"
+                    }
+                  ],
+                  "filters": [
+                    {
+                      "expression": "`OrderStatus` IN ('Completed')"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Total Discount Amount",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "measure(total_discount_amount)",
+                  "rowNumber": 0
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 9,
+            "y": 2,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "customer_type_sales",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5231517d",
+                  "fields": [
+                    {
+                      "name": "CustomerType",
+                      "expression": "`CustomerType`"
+                    },
+                    {
+                      "name": "measure(total_sales)",
+                      "expression": "MEASURE(`total_sales`)"
+                    }
+                  ],
+                  "filters": [
+                    {
+                      "expression": "`OrderStatus` IN ('Completed')"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Sales by Customer Type",
+                "showTitle": true
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "CustomerType",
+                  "displayName": "CustomerType",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "measure(total_sales)",
+                  "displayName": "total_sales",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "CustomerType",
+                  "displayName": "CustomerType",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "label": {
+                  "show": true
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 6,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "payment_method",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5231517d",
+                  "fields": [
+                    {
+                      "name": "measure(total_sales)",
+                      "expression": "MEASURE(`total_sales`)"
+                    },
+                    {
+                      "name": "PaymentMethod",
+                      "expression": "`PaymentMethod`"
+                    }
+                  ],
+                  "filters": [
+                    {
+                      "expression": "`OrderStatus` IN ('Completed')"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Payment Method Distribution",
+                "showTitle": true
+              },
+              "widgetType": "pie",
+              "encodings": {
+                "angle": {
+                  "fieldName": "measure(total_sales)",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "displayName": "total_sales"
+                },
+                "color": {
+                  "fieldName": "PaymentMethod",
+                  "displayName": "PaymentMethod",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "label": {
+                  "show": true
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 6,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "category_performance",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5231517d",
+                  "fields": [
+                    {
+                      "name": "ProductCategory",
+                      "expression": "`ProductCategory`"
+                    },
+                    {
+                      "name": "measure(total_sales)",
+                      "expression": "MEASURE(`total_sales`)"
+                    },
+                    {
+                      "name": "measure(units_sold)",
+                      "expression": "MEASURE(`units_sold`)"
+                    },
+                    {
+                      "name": "measure(avg_discount)",
+                      "expression": "MEASURE(`avg_discount`)"
+                    }
+                  ],
+                  "filters": [
+                    {
+                      "expression": "`OrderStatus` IN ('Completed')"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Product Category Performance",
+                "showTitle": true
+              },
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "ProductCategory"
+                  },
+                  {
+                    "fieldName": "measure(total_sales)"
+                  },
+                  {
+                    "fieldName": "measure(units_sold)"
+                  },
+                  {
+                    "fieldName": "measure(avg_discount)"
+                  }
+                ]
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 12,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "regional_channel_pivot",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5231517d",
+                  "fields": [
+                    {
+                      "name": "StoreRegion",
+                      "expression": "`StoreRegion`"
+                    },
+                    {
+                      "name": "SalesChannel",
+                      "expression": "`SalesChannel`"
+                    },
+                    {
+                      "name": "measure(total_sales)",
+                      "expression": "MEASURE(`total_sales`)"
+                    }
+                  ],
+                  "filters": [
+                    {
+                      "expression": "`OrderStatus` IN ('Completed')"
+                    }
+                  ],
+                  "cubeGroupingSets": {
+                    "sets": [
+                      {
+                        "fieldNames": [
+                          "StoreRegion"
+                        ]
+                      },
+                      {
+                        "fieldNames": [
+                          "SalesChannel"
+                        ]
+                      }
+                    ]
+                  },
+                  "disaggregated": false,
+                  "orders": [
+                    {
+                      "direction": "ASC",
+                      "expression": "`StoreRegion`"
+                    },
+                    {
+                      "direction": "ASC",
+                      "expression": "`SalesChannel`"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "version": 4,
+              "frame": {
+                "title": "Regional Performance by Channel",
+                "showTitle": true
+              },
+              "widgetType": "pivot",
+              "encodings": {
+                "rows": {
+                  "fields": [
+                    {
+                      "fieldName": "StoreRegion",
+                      "scale": {
+                        "type": "categorical"
+                      }
+                    }
+                  ]
+                },
+                "columns": {
+                  "fields": [
+                    {
+                      "fieldName": "SalesChannel",
+                      "scale": {
+                        "type": "categorical"
+                      }
+                    }
+                  ]
+                },
+                "cells": {
+                  "fields": [
+                    {
+                      "fieldName": "measure(total_sales)",
+                      "cellType": "text"
+                    }
+                  ],
+                  "displayAs": "rows"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 12,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "monthly_category_trends",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5231517d",
+                  "fields": [
+                    {
+                      "name": "ProductCategory",
+                      "expression": "`ProductCategory`"
+                    },
+                    {
+                      "name": "monthly(SaleMonth)",
+                      "expression": "DATE_TRUNC(\"MONTH\", `SaleMonth`)"
+                    },
+                    {
+                      "name": "measure(total_sales)",
+                      "expression": "MEASURE(`total_sales`)"
+                    }
+                  ],
+                  "filters": [
+                    {
+                      "expression": "`OrderStatus` IN ('Completed')"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Monthly Sales Trends by Category",
+                "showTitle": true
+              },
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "monthly(SaleMonth)",
+                  "displayName": "Month",
+                  "scale": {
+                    "type": "temporal"
+                  }
+                },
+                "y": {
+                  "fieldName": "measure(total_sales)",
+                  "displayName": "total_sales",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "ProductCategory",
+                  "displayName": "ProductCategory",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "label": {
+                  "show": false
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 18,
+            "width": 12,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "page_header",
+            "multilineTextboxSpec": {
+              "lines": [
+                "# <span style=\"text-align:center;display:block\"><span style=\"font-weight: 700;\">Customer & Behavioral Analytics</span></span>"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 12,
+            "height": 2
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "canvasBackgroundColor": {
+        "light": "#E2E2E2",
+        "dark": "#111416"
+      },
+      "widgetBackgroundColor": {
+        "light": "#EAF1F6",
+        "dark": "#0D1013"
+      },
+      "widgetBorderColor": {
+        "light": "#DEE5EB",
+        "dark": "#282E34"
+      },
+      "fontColor": {
+        "light": "#543F10",
+        "dark": "#F1D8A2"
+      },
+      "selectionColor": {
+        "light": "#3A95B7",
+        "dark": "#64A5BC"
+      },
+      "visualizationColors": [
+        "#40777C",
+        "#D07D70",
+        "#93B2BD",
+        "#E0C085",
+        "#CADBD4",
+        "#EFE7DE",
+        "#4B2C17"
+      ],
+      "widgetHeaderAlignment": "LEFT",
+      "fontFamily": "Montserrat",
+      "widgetPadding": 16,
+      "widgetMargin": 8,
+      "widgetCornerRadius": 16,
+      "widgetShadow": 0,
+      "continuousGradient": {
+        "lightMode": {
+          "fromCategoricalIndex": 0
+        },
+        "darkMode": {
+          "fromCategoricalIndex": 0
+        }
+      },
+      "fontSettings": {
+        "base": {
+          "fontFamily": "Montserrat",
+          "fontColor": {
+            "light": "#543F10",
+            "dark": "#F1D8A2"
+          },
+          "fontSize": 12,
+          "fontWeight": 400
+        },
+        "widgetTitle": {
+          "fontSize": 14,
+          "fontWeight": 500
+        },
+        "widgetDescription": {
+          "fontSize": 12,
+          "fontWeight": 400
+        },
+        "fieldTitle": {
+          "textCase": "TEXT_CASE_UPPERCASE",
+          "fontColor": {
+            "light": "#655228",
+            "dark": "#D9C292"
+          },
+          "fontSize": 11,
+          "fontWeight": 400
+        },
+        "fieldValue": {
+          "fontColor": {
+            "light": "#655228",
+            "dark": "#D9C292"
+          },
+          "fontSize": 11,
+          "fontWeight": 400
+        }
+      },
+      "gridLineColor": {
+        "light": "#CFD1CD",
+        "dark": "#36342C"
+      },
+      "axisLineColor": {
+        "light": "#BDB7AA",
+        "dark": "#4D483B"
+      }
+    },
+    "applyModeEnabled": false
+  }
+}
